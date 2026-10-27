@@ -1,0 +1,12 @@
+task,criteria,base_9b,rl_round3,rl_round7,base_met,round7_met
+compare-asserted-patent-claims-against-accused-product,52,0.5385,0.4423,0.5962,28,31
+compare-ip-litigation,56,0.7143,0.7857,0.875,40,49
+compare-proposed-claim-constructions-against-patent-specification,48,0.8333,0.8542,0.9167,40,44
+compare-source-code-documentation-against-patent-claims,51,0.8039,0.8431,0.8824,41,45
+extract-filing-dates-from-patent-schedule,42,0.3333,0.2857,0.3571,14,15
+extract-key-terms-from-patent-specification,59,0.7797,0.7797,0.9492,46,56
+extract-key-terms-from-technical-patent-specifications,59,0.5085,0.5424,0.5932,30,35
+identify-accused-product-issues,43,0.6744,0.6512,0.8837,29,38
+identify-ip-litigation,44,0.6591,0.7045,0.5227,29,23
+identify-prior-art-deficiencies-in-patent-infringement-defense,37,0.7297,0.7838,0.7838,27,29
+review-patent-complaint,34,0.3235,0.2941,0.5,11,17

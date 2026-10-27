@@ -1,0 +1,21 @@
+{
+  "model": "Qwen/Qwen3.5-9B",
+  "adapter": {"type": "LoRA", "r": 16, "alpha": 32, "dropout": 0.0,
+              "target_modules": "language model q/k/v/o and gate/up/down projections"},
+  "thinking": "off (enable_thinking=false) for rollouts, training and evaluation",
+  "train_set": "82 patent practice matters (11 task profiles)",
+  "rounds": 7,
+  "matters_per_round": 32,
+  "rollouts_per_matter": 4,
+  "rollout_sampling": {"temperature": 0.8, "max_tokens": 12288, "repetition_penalty": 1.05, "max_model_len": 40000},
+  "reward": "share of the matter's rubric criteria met, judged by Claude Sonnet 5.5 over the full rubric; 0 if a quotation is found in no matter file",
+  "advantage": "group-normalised within a matter's 4 rollouts: (r - mean) / (std + 1e-6); groups with zero spread are skipped",
+  "loss": "-advantage x mean log-probability of the completion tokens",
+  "optimizer": {"type": "AdamW", "weight_decay": 0.0, "grad_clip": 1.0, "grad_accumulation": 16,
+                "learning_rate": {"rounds_1_3": 2e-5, "rounds_4_7": 1e-4}},
+  "updates_per_round": "one on-policy pass over the round's rollouts (8 optimizer steps)",
+  "evaluation": {"set": "11 Harvey LAB intellectual-property tasks, not used in training",
+                 "decoding": {"temperature": 0.0, "max_tokens": 16384, "repetition_penalty": 1.05},
+                 "runs_per_task": 1, "judge": "Claude Opus 5.5, full rubric, one call per deliverable"},
+  "hardware": "1x H100 80GB on Modal; vLLM 0.31.0 for rollouts and evaluation, transformers 5.17 + peft 0.21 for updates"
+}
